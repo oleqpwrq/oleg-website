@@ -1,9 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import "./globals.css"; // если у тебя есть общий css (можно пустой)
+import "./globals.css";
 import { Inter, Rubik } from "next/font/google";
 
-// Inter — базовый текст, Rubik — для имени в хедере
+// Inter — базовый текст, Rubik — для имени (кириллица включена)
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
   weight: ["400", "600", "800"],
@@ -19,6 +19,10 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
   title: "Олег Прокуронов — Сайт-визитка",
+  icons: [
+    { rel: "icon", url: "/favicon.ico" }, // public/favicon.ico
+    { rel: "apple-touch-icon", url: "/icon.png" }, // app/icon.png (512×512) — опционально
+  ],
 };
 
 export default function RootLayout({
@@ -28,11 +32,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${inter.className} ${rubik.variable}`}>
-      <body style={{
-        WebkitFontSmoothing: "antialiased",
-        MozOsxFontSmoothing: "grayscale",
-        textRendering: "optimizeLegibility",
-      }}>
+      {/* Доп. мета можно добавлять через export const metadata выше */}
+      <body
+        style={{
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+          textRendering: "optimizeLegibility",
+        }}
+      >
         {children}
       </body>
     </html>
